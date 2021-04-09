@@ -1,6 +1,9 @@
 package com.example.carbontest.data.model
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class MovieResults (
 
 	@SerializedName("adult") val adult : Boolean,
@@ -17,4 +20,4 @@ data class MovieResults (
 	@SerializedName("video") val video : Boolean,
 	@SerializedName("vote_average") val vote_average : Double,
 	@SerializedName("vote_count") val vote_count : Int
-)
+) : Parcelable {}

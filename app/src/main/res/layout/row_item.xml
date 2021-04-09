@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/hoteldetails_myContainer"
+                android:id="@+id/myContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
@@ -47,7 +47,7 @@
                     android:layout_height="150dp"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/holly_wood" />
+                     />
 
 
 

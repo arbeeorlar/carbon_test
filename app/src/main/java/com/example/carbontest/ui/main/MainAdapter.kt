@@ -35,7 +35,7 @@ class MainAdapter(
             itemView.description.text = "${movie.overview.substring(0, 55)}..."
             Picasso.get()
                 .load("https://api.themoviedb.org${movie.poster_path}")
-                .placeholder(R.drawable.holly_wood)
+                //.placeholder(R.mipmap.holly_wood)
                 .into(itemView.movieImg, object : com.squareup.picasso.Callback {
                     override fun onSuccess() {
                         itemView.progressView.isVisible = false;
@@ -46,9 +46,6 @@ class MainAdapter(
                         print(e?.message.toString())
                     }
                 })
-//            Glide.with(itemView.imageViewAvatar.context)
-//                .load(user.avatar)
-//                .into(itemView.imageViewAvatar)
         }
 
         override fun onClick(v: View?) {
