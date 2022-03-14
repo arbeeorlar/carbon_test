@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.example.carbontest.data.model.MovieResults
 import com.example.carbontest.data.repository.MainRepository
 import com.example.carbontest.utils.Resource
+import com.example.carbontest.utils.Status
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -29,7 +30,7 @@ class MainViewModel(private val repo : MainRepository) : ViewModel() {
                 .subscribe({ userList ->
                     users.postValue(Resource.success(userList.results))
                 }, { throwable ->
-                    users.postValue(Resource.error("Something Went Wrong", null))
+                    users.postValue(Resource.error(throwable.message.toString(), null))
                 })
         )
     }
@@ -42,4 +43,34 @@ class MainViewModel(private val repo : MainRepository) : ViewModel() {
     fun getUsers(): LiveData<Resource<List<MovieResults>>> {
         return users
     }
+
+
+    data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+
+        companion object {
+
+            fun <T> success(data: T?): Resource<T> {
+                return Resource(Status.SUCCESS, data, null)
+            }
+
+            fun <T> error(msg: String, data: T?): Resource<T> {
+                return Resource(Status.ERROR, data, msg)
+            }
+
+            fun <T> loading(data: T?): Resource<T> {
+                return Resource(Status.LOADING, data, null)
+            }
+
+        }
+
+    }
+
+//    enum class Status {
+//        SUCCESS,
+//        ERROR,
+//        LOADING
+//    }
+
+
 }
+

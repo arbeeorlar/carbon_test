@@ -31,11 +31,12 @@ class MainAdapter(
         }
 
         fun bind(movie: MovieResults) {
+            val imageStrring = "https://image.tmdb.org/t/p/w342${movie.poster_path}"
             itemView.movieTitle.text = "Title:${movie.title}"
             itemView.description.text = "${movie.overview.substring(0, 55)}..."
+
             Picasso.get()
-                .load("https://api.themoviedb.org${movie.poster_path}")
-                //.placeholder(R.mipmap.holly_wood)
+                .load(imageStrring)
                 .into(itemView.movieImg, object : com.squareup.picasso.Callback {
                     override fun onSuccess() {
                         itemView.progressView.isVisible = false;

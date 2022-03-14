@@ -16,16 +16,13 @@ import com.example.carbontest.ui.base.ViewModelFactory
 import com.example.carbontest.ui.main.MainAdapter
 import com.example.carbontest.ui.main.MainViewModel
 import com.example.carbontest.utils.Status
+import com.example.carbontest.utils.Status.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
-
     private lateinit var mainViewModel: MainViewModel
     private lateinit var adapter: MainAdapter
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
@@ -49,16 +46,16 @@ class MainActivity : AppCompatActivity() {
     private fun setupObserver() {
         mainViewModel.getUsers().observe(this, Observer {
             when (it.status) {
-                Status.SUCCESS -> {
+                SUCCESS -> {
                     progressBar.visibility = View.GONE
                     it.data?.let { users -> renderList(users) }
                     recyclerView.visibility = View.VISIBLE
                 }
-                Status.LOADING -> {
+                LOADING -> {
                     progressBar.visibility = View.VISIBLE
                     recyclerView.visibility = View.GONE
                 }
-                Status.ERROR -> {
+                ERROR -> {
                     //Handle Error
                     progressBar.visibility = View.GONE
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
